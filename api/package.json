@@ -1,10 +1,11 @@
 {
-  "name": "api",
+  "name": "Xnorm Cloud Status Verifier",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Rest API for reciving request from status site responding if the server is up and running",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./src/app.js",
+    "start": "node ./src/app.js"
   },
   "keywords": [],
   "author": "",
