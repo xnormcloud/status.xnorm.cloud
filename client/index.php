@@ -97,15 +97,7 @@
                 <h5 class="title-status-h5">Servers Status<span id="current-time"><?php getServerDate(); ?></span></h5>
                 <p class="title-status-p">Information y refreshed every 10 seconds. Please reload</p>
             </div>
-            <div class="status-div-optionel chck">
-                <p><b>Internal Systems</b> Our main website, internal systems and cloud master platform. <span>Operational <i class="fa fa-circle-o-notch" aria-hidden="true"></i></span></p>
-            </div>
-            <div class="status-div-optionel non">
-                <p><b>Internal Systems</b> Our main website, internal systems and cloud master platform. <span>Offline <i class="fa fa-circle-o-notch" aria-hidden="true"></i></span></p>
-            </div>
-            <div class="status-div-optionel non-chck">
-                <p><b>Internal Systems</b> Our main website, internal systems and cloud master platform. <span>Offline <i class="fa fa-circle-thin" aria-hidden="true"></i></span></p>
-            </div>
+            <?php checkServersStatus(); ?>
         </div>
     </div>
     </div>
@@ -214,5 +206,28 @@ function getServerDate() {
     $date = date('d/m/Y h:i');
     echo $date;
 }
- // call the function
+function checkServersStatus(){
+    $url = 'http://127.0.0.1:8222';
+    $response = urlExists($url);
+
+    if ($response == true) {
+        echo "<div class=\"status-div-optionel chck\"><p><b>Internal Systems</b> Our main website, internal systems and cloud master platform. <span>Operational <i class=\"fa fa-circle-o-notch\" aria-hidden=\"true\"></i></span></p></div>";
+    } else {
+        echo "<div class=\"status-div-optionel non-chck\"><p><b>Internal Systems</b> Our main website, internal systems and cloud master platform. <span>Offline <i class=\"fa fa-circle-thin\" aria-hidden=\"true\"></i></span></p></div>";
+    }
+}
+function urlExists($url) {
+    $handle = curl_init($url);
+    curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+
+    $response = curl_exec($handle);
+    $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+    curl_close($handle);
+
+    if($httpCode >= 200 && $httpCode <= 400) {
+        return true;
+    } else {
+        return false;
+    }
+}
 ?>
