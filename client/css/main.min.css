@@ -2111,7 +2111,7 @@ body.fourth-color-styles #coodiv-header{background:#00BCD4;background:-moz-linea
     border-radius: 25px;
 }
 .tt-time-status .title-status{
-    background: #00BCD4;
+    background: #f59b42; /*identified #00BCD4*/
     color: #fff;
     font-weight: bold;
     padding: 6px 22px;
